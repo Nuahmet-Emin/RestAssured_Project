@@ -143,5 +143,45 @@ public class SpartanPostingData_Test extends SpartanNoAuthBaseTest {
 
     }
 
+    @DisplayName("PATCH /spartans/{id} body as String")
+    @Test
+    public void testPartialUpdateDataWithString(){
 
-}
+        String patchBody = " {\"phone\":1234567890 } ";
+        System.out.println(patchBody); // {"phone":1234567890 }
+
+
+
+        given()
+                   .log().all()
+                   .pathParam("id",33)
+                   .contentType(ContentType.JSON)
+                   .body(patchBody).
+           when()
+                   .patch("spartans/{id}").
+           then()
+                   .statusCode(204)
+                   ;
+
+    }
+
+    @DisplayName("Test DELETE /spartans/{id} ")
+    @Test
+    public void testDeleteOne(){
+
+
+
+        given()
+                .log().uri()
+                .pathParam("id" , 4).
+        when()
+                .delete("/spartans/{id}").
+        then()
+                .statusCode( equalTo(204) ) ;
+
+
+    }
+
+
+
+    }
